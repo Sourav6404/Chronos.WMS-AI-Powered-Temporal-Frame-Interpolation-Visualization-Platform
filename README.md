@@ -6,12 +6,6 @@ Inspired by **NVIDIA AI Research**, **RunwayML**, and **Tesla's visualization ne
 
 ---
 
-## 🚀 Recommended First Step: Set Active Workspace
-
-To run the commands easily and interact with the terminal in your IDE, please set this directory as your active workspace:
-👉 **`C:\Users\ACER\.gemini\antigravity-ide\scratch\wms-frame-interpolation`**
-
----
 
 ## 🛠️ Technology Stack & Architecture
 

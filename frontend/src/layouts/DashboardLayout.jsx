@@ -22,7 +22,7 @@ export default function DashboardLayout({ children }) {
     fetchStatsAndProfile();
     
     // Auto-update stats every 8s
-    const interval = setInterval(fetchStats, 8000);
+    const interval = setInterval(fetchStatsAndProfile, 8000);
     return () => clearInterval(interval);
   }, []);
 

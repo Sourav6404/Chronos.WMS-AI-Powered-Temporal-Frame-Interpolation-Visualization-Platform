@@ -120,7 +120,7 @@ export const authService = {
       const res = await api.get('/auth/profile/');
       return res.data;
     } catch (err) {
-      return { username: "Guest Researcher", email: "guest@wms.ai", dark_mode: true, gpu_allocation_limit: 8.0 };
+      return { username: "Guest User", email: "", dark_mode: true, gpu_allocation_limit: 8.0 };
     }
   },
   logout: () => {
@@ -135,7 +135,7 @@ export const projectService = {
       const res = await api.get('/projects/');
       return res.data;
     } catch (err) {
-      return mockProjects;
+      return [];
     }
   },
   get: async (id) => {
@@ -228,7 +228,15 @@ export const analyticsService = {
       const res = await api.get('/analytics/system-stats/');
       return res.data;
     } catch (err) {
-      return mockStats;
+      return {
+        active_projects: 0,
+        processing_queue: 0,
+        fps_improvement: 0.0,
+        ai_accuracy_score: 0.0,
+        average_psnr: 0.0,
+        gpu_usage_pct: 0.0,
+        processing_time_avg_sec: 0.0
+      };
     }
   },
   getProjectReport: async (projectId) => {

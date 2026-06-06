@@ -4,19 +4,22 @@ import {
   LayoutDashboard, UploadCloud, Video, BarChart3, Binary, 
   History, Settings, ShieldAlert, Cpu, Bell, Activity 
 } from 'lucide-react';
-import { analyticsService } from '../services/api';
+import { analyticsService, authService } from '../services/api';
 
 export default function DashboardLayout({ children }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [stats, setStats] = useState(null);
+  const [profile, setProfile] = useState(null);
   
   useEffect(() => {
-    const fetchStats = async () => {
+    const fetchStatsAndProfile = async () => {
       const data = await analyticsService.getSystemStats();
       setStats(data);
+      const userProfile = await authService.getProfile();
+      setProfile(userProfile);
     };
-    fetchStats();
+    fetchStatsAndProfile();
     
     // Auto-update stats every 8s
     const interval = setInterval(fetchStats, 8000);
@@ -106,8 +109,12 @@ export default function DashboardLayout({ children }) {
                 AI
               </div>
               <div className="hidden sm:block text-left">
-                <div className="text-xs font-semibold text-cyber-highlight font-display">RESEARCHER</div>
-                <div className="text-[10px] text-cyber-text">HOST MODE</div>
+                <div className="text-xs font-semibold text-cyber-highlight font-display uppercase">
+                  {profile?.username || 'RESEARCHER'}
+                </div>
+                <div className="text-[10px] text-cyber-text uppercase">
+                  {profile?.email ? 'AUTHENTICATED' : 'HOST MODE'}
+                </div>
               </div>
             </div>
           </div>

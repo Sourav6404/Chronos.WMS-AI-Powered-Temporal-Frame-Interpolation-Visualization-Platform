@@ -133,7 +133,8 @@ export const projectService = {
   list: async () => {
     try {
       const res = await api.get('/projects/');
-      return res.data;
+      // Ensure we always return an array, even if the server returns HTML by mistake
+      return Array.isArray(res.data) ? res.data : [];
     } catch (err) {
       return [];
     }
@@ -226,6 +227,7 @@ export const analyticsService = {
   getSystemStats: async () => {
     try {
       const res = await api.get('/analytics/system-stats/');
+      if (typeof res.data !== 'object' || res.data === null) throw new Error("Invalid stats data");
       return res.data;
     } catch (err) {
       return {

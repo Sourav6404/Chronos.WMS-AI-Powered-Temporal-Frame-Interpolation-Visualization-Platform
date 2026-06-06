@@ -19,7 +19,7 @@ export default function Dashboard() {
       setStats(systemStats);
       
       const projs = await projectService.list();
-      setProjects(projs.slice(0, 5));
+      setProjects(Array.isArray(projs) ? projs.slice(0, 5) : []);
 
       // Generate futuristic charting wave points
       setChartData([

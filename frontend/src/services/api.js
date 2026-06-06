@@ -111,6 +111,7 @@ export const authService = {
       return res.data;
     } catch (err) {
       if (err.code === 'ERR_NETWORK') {
+        localStorage.setItem('mock_username', username);
         return { message: "Mock registration successful for demo." };
       }
       throw err;

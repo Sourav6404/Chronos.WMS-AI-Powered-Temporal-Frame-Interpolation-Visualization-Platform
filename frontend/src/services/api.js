@@ -99,6 +99,7 @@ export const authService = {
       if (err.code === 'ERR_NETWORK') {
         // Fallback for demo when backend is not running
         localStorage.setItem('access_token', 'mock_token_abc123');
+        localStorage.setItem('mock_username', username);
         return { access: 'mock_token', refresh: 'mock_refresh', user: { username } };
       }
       throw err;
@@ -120,7 +121,8 @@ export const authService = {
       const res = await api.get('/auth/profile/');
       return res.data;
     } catch (err) {
-      return { username: "Guest User", email: "", dark_mode: true, gpu_allocation_limit: 8.0 };
+      const savedUsername = localStorage.getItem('mock_username') || "Guest User";
+      return { username: savedUsername, email: "", dark_mode: true, gpu_allocation_limit: 8.0 };
     }
   },
   logout: () => {

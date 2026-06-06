@@ -74,10 +74,10 @@ export default function DashboardLayout({ children }) {
           <div className="p-4 rounded-xl glass-panel flex flex-col gap-3">
             <div className="flex justify-between items-center text-xs">
               <span className="font-display font-semibold text-cyber-highlight">GPU TEMP</span>
-              <span className="font-semibold text-cyber-accent">54°C</span>
+              <span className="font-semibold text-cyber-accent">{stats ? Math.round(40 + (stats.gpu_usage_pct * 0.45)) : 54}°C</span>
             </div>
             <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-neon" style={{ width: '45%' }} />
+              <div className="h-full bg-gradient-neon" style={{ width: `${stats ? Math.min(100, Math.round(40 + (stats.gpu_usage_pct * 0.45))) : 45}%` }} />
             </div>
             <div className="flex justify-between items-center text-[10px] text-cyber-text font-semibold">
               <span>LOAD: {stats.gpu_usage_pct}%</span>
